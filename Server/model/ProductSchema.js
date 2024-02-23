@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
     const schema = Joi.object({
         productname: Joi.string().required().label("Prodcutname"),
         price: Joi.number().positive().required().label("price"),
-//productimage:Joi.required().label("Image")
+
     });
   
     return schema.validate(data);
