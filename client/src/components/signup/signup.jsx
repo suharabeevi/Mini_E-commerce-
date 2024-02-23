@@ -16,10 +16,12 @@ setData({...data,[input.name]:input.value})
 
 
     const handleSubmit =async(e)=>{
+        console.log(e);
         e.preventDefault()
         try{
           const url= "http://localhost:5000/api/user";
           const {data:res} =await axios.post(url,data)
+          
           navigate("/login")
           console.log(res.message);
         }catch(error){
@@ -44,10 +46,10 @@ if(error.response && error.response.status>=400 && error.response.status<=500){
             <form className={styles.form_container}>
                 <h1>Create Account</h1>
 <input type="text" placeholder='username' name='username' onChange ={handleChange} value={data.username} required className={styles.input}/>
-<input type="email" placeholder='Email' name='email' onChange ={handleChange} value={data.email} required className={styles.input}/>
+<input type="email" placeholder='Email' name='email' onChange ={handleChange}  value={data.email} required className={styles.input}/>
 <input type="password" placeholder='Password' name='password' onChange ={handleChange} value={data.password} required className={styles.input}/>
 {error && <div className={styles.error_msg}>{error}</div>}
-<button type='submit' className={styles.green_btn} onSubmit={handleSubmit}>
+<button type='submit' className={styles.green_btn} onClick={handleSubmit}>
     Sign Up
 </button>
             </form>
