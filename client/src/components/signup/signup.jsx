@@ -38,7 +38,6 @@ if(error.response && error.response.status>=400 && error.response.status<=500){
 <Link to='/login'>
     <button type='button' className={styles.white_btn}>
         sign in
-
     </button>
 </Link>
         </div>
