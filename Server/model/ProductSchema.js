@@ -6,7 +6,6 @@ const ProductSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     productimage: {type: String,required: true,}
   });
-
   const Product = mongoose.model("Product", ProductSchema);
 
   const productvalidate = (data) => {

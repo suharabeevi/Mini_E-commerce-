@@ -9,7 +9,7 @@ const Main = () => {
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
                 <h1>
-                    facebook
+                    Sportraa
                 </h1>
                 <button className={styles.white_btn} onClick={handlelogout}>
                     logout
