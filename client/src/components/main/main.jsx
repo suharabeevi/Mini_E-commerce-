@@ -4,20 +4,39 @@ import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css'; // Assuming you have a CSS module for styling
 const Main = () => {
     const [records, setRecords] = useState([]);
+    const [quantities, setQuantities] = useState([]); // Initialize quantities with 1 for each record
+
     useEffect(() => {
         fetch("http://localhost:5000/api/user/getprodcuts")
             .then(response => response.json())
             .then(data => {
                 console.log("Fetched data:", data.allproducts);
                 setRecords(data.allproducts);
+                setQuantities(data.allproducts.map(() => 0));
+
             })
             .catch(err => console.log(err));
     }, []);
-     // Empty dependency array ensures the effect runs only once on mount
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
     }
+
+    const increaseQuantity = (index) => {
+        const newQuantities = [...quantities];
+        newQuantities[index]++;
+        setQuantities(newQuantities);
+    };
+
+    const decreaseQuantity = (index) => {
+        const newQuantities = [...quantities];
+        if (newQuantities[index] > 0) {
+            newQuantities[index]--;
+            setQuantities(newQuantities);
+        }
+    };
+
     return (
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
@@ -29,16 +48,19 @@ const Main = () => {
                 </button>
             </nav>
             {records.map((record, index) => (
-                     <div className='d-inline-flex p-2' >
+                     <div className='d-inline-flex p-2'key={record._id} >
                      <Card  className='shadow p-3 mb-2 bg-body-tertiary rounded' style={{ width: '13rem', justifyContent:'center'}}>
-                     <Card.Img className='p-2'variant="top" src={record.productimage} style={{ width: '200px', height: '200px' }}/>
+                     <Card.Img className='p-2'variant="top" src={record.productimage} style={{ width: '190px', height: '200px' }}/>
                      <Card.Body>
                        <Card.Title className='text-info'>{record.productname}</Card.Title>
                        <h5>Price: ₹ {record.price}/-</h5>
                        <div>
-                         <p>
-                           Qty:<Button className='m-1'>+</Button>1<Button className='m-1'>-</Button>
-                         </p>
+                       <p>
+                                    Qty:
+                                    <Button className='m-1' onClick={() => decreaseQuantity(index)}>-</Button>
+                                    {quantities[index]}
+                                    <Button className='m-1' onClick={() => increaseQuantity(index)}>+</Button>
+                                </p>
                        </div>
                        <Button variant="primary">Add to cart</Button>
                      </Card.Body>
@@ -48,6 +70,5 @@ const Main = () => {
         </div>
     );
 }
-
 export default Main;
 
