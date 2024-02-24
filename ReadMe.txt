@@ -1,4 +1,4 @@
-SPORTSSYNCE E-COMMERCE APPLICATION
+SPORTSSYNC E-COMMERCE APPLICATION
 
 
 This is Mini-Ecommerce Application for sports items - Using MERN Technology
