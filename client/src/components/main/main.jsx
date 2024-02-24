@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
  import Button from 'react-bootstrap/Button';
  import Card from 'react-bootstrap/Card';
-import styles from './styles.module.css'; // Assuming you have a CSS module for styling
+import styles from './styles.module.css'; 
 const Main = () => {
     const [records, setRecords] = useState([]);
-    const [quantities, setQuantities] = useState([]); // Initialize quantities with 1 for each record
+    const [quantities, setQuantities] = useState([]); 
 
     useEffect(() => {
         fetch("http://localhost:5000/api/user/getprodcuts")
