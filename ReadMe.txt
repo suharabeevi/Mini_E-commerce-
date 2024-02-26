@@ -1,3 +1,6 @@
+SPORTSSYNC E-COMMERCE APPLICATION
+
+
 This is Mini-Ecommerce Application for sports items - Using MERN Technology
 
 The back-end is built using Node.js, Express.js, and MongoDB with Mongoose
