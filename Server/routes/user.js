@@ -7,4 +7,5 @@ router.post("/login",usercontroller.userlogin)
 router.post('/prodcuts',upload,usercontroller.addproducts)
 router.get('/getprodcuts',usercontroller.listProducts)
 
+
 module.exports = router;

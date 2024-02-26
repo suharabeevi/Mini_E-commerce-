@@ -5,6 +5,8 @@ import styles from './styles.module.css';
 const Main = () => {
     const [records, setRecords] = useState([]);
     const [quantities, setQuantities] = useState([]); 
+    const [price, setPrice] = useState(0); // Initialize price state with 0
+
 
     useEffect(() => {
         fetch("http://localhost:5000/api/user/getprodcuts")
@@ -17,7 +19,6 @@ const Main = () => {
             })
             .catch(err => console.log(err));
     }, []);
-
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
@@ -27,6 +28,9 @@ const Main = () => {
         const newQuantities = [...quantities];
         newQuantities[index]++;
         setQuantities(newQuantities);
+         // Calculate new price based on quantity and product price
+         const productPrice = records[index].price;
+         setPrice(prevPrice => prevPrice + productPrice);
     };
 
     const decreaseQuantity = (index) => {
@@ -34,6 +38,9 @@ const Main = () => {
         if (newQuantities[index] > 0) {
             newQuantities[index]--;
             setQuantities(newQuantities);
+
+            const productPrice = records[index].price;
+            setPrice(prevPrice => prevPrice - productPrice);
         }
     };
 
@@ -53,7 +60,8 @@ const Main = () => {
                      <Card.Img className='p-2'variant="top" src={record.productimage} style={{ width: '190px', height: '200px' }}/>
                      <Card.Body>
                        <Card.Title className='text-info'>{record.productname}</Card.Title>
-                       <h5>Price: ₹ {record.price}/-</h5>
+                       <h6>Price: ₹ {record.price}/-</h6>
+                       {/* <h5>TOTAL: ₹ {record.price * quantities[index]}/-</h5> */}
                        <div>
                        <p>
                                     Qty:
@@ -67,6 +75,11 @@ const Main = () => {
                    </Card>
                    </div>
                 ))}
+                <div className={styles.total_price}>
+                Total Price: ₹ {price}
+                <Button variant="primary">payment</Button>
+            </div>
+            
         </div>
     );
 }
