@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
  import Button from 'react-bootstrap/Button';
  import Card from 'react-bootstrap/Card';
 import styles from './styles.module.css'; 
+
 const Main = () => {
     const [records, setRecords] = useState([]);
     const [quantities, setQuantities] = useState([]); 
@@ -43,7 +44,42 @@ const Main = () => {
             setPrice(prevPrice => prevPrice - productPrice);
         }
     };
+    const checkout = () => {
 
+        const items = records.map((record, index) => ({
+                    id: record._id,
+                    name: record.productname,
+                    quantity: quantities[index],
+                    price: record.price * quantities[index]
+                }))
+                .filter(item => item.quantity > 0);
+                console.log(items,"heloooo");
+
+        fetch(`http://localhost:5000/create-checkout-session`, {
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          mode:"cors",
+          body: JSON.stringify({
+            items: items
+            
+          })
+        
+        })
+        .then(async res => {
+          if (res.ok) return res.json()
+          const json = await res.json();
+            return await Promise.reject(json);
+        })
+        .then(({url})=>{
+          window.location = url
+        })
+        .catch(e => {
+          console.log(e.error)
+        })
+      }
+   
     return (
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
@@ -77,7 +113,7 @@ const Main = () => {
                 ))}
                 <div className={styles.total_price}>
                 Total Price: ₹ {price}
-                <Button variant="primary">payment</Button>
+                <Button variant="primary" onClick={checkout}>payment</Button>
             </div>
             
         </div>
