@@ -8,7 +8,6 @@ const Main = () => {
     const [quantities, setQuantities] = useState([]); 
     const [price, setPrice] = useState(0); // Initialize price state with 0
 
-
     useEffect(() => {
         fetch("http://localhost:5000/api/user/getprodcuts")
             .then(response => response.json())
@@ -44,18 +43,20 @@ const Main = () => {
             setPrice(prevPrice => prevPrice - productPrice);
         }
     };
+
+    
     const checkout = () => {
 
         const items = records.map((record, index) => ({
                     id: record._id,
                     name: record.productname,
                     quantity: quantities[index],
-                    price: record.price * quantities[index]
+                    price: record.price 
                 }))
                 .filter(item => item.quantity > 0);
                 console.log(items,"heloooo");
 
-        fetch(`http://localhost:5000/create-checkout-session`, {
+        fetch(`http://localhost:5000/api/user/create-checkout-session`, {
           method:"POST",
           headers:{
             "Content-Type":"application/json"
@@ -79,7 +80,12 @@ const Main = () => {
           console.log(e.error)
         })
       }
+      
    
+
+
+
+    
     return (
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
