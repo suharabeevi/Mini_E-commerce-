@@ -1,11 +1,19 @@
-import React from 'react'
+import React from 'react';
 
+const Success = () => {
+    const successStyle = {
+        backgroundColor: 'lightgreen',
+        color: 'white',
+        padding: '10px',
+        borderRadius: '5px',
+        textAlign: 'center'
+    };
 
-const Sucess =()=>{
     return (
-        <div>
-           Sucess
-            </div>
-    )
+        <div style={successStyle}>
+            Success
+        </div>
+    );
 }
-export default Sucess
+
+export default Success;

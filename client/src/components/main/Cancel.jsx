@@ -1,11 +1,19 @@
-import React from 'react'
+import React from 'react';
 
+const Cancel = () => {
+    const CancelStyle = {
+        backgroundColor: 'red',
+        color: 'white',
+        padding: '10px',
+        borderRadius: '5px',
+        textAlign: 'center'
+    };
 
-const Cancel =()=>{
     return (
-        <div>
+        <div style={CancelStyle}>
             Cancel
-            </div>
-    )
+        </div>
+    );
 }
-export default Cancel
+
+export default Cancel;
