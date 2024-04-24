@@ -15,3 +15,5 @@ Cloudinary - for cloud-based storage for management of media assets
 The frond-end is build uisng react.js,CSS ensuring a robust user interface
 
 Also using diffrent hooks[useState,UseEffect]
+
+PostmanLink:https://documenter.getpostman.com/view/28042590/2sA35D4Nj7

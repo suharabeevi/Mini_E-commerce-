@@ -13,8 +13,6 @@ const Signup =()=>{
     const handleChange =({currentTarget:input})=>{
 setData({...data,[input.name]:input.value})
     }
-
-
     const handleSubmit =async(e)=>{
         console.log(e);
         e.preventDefault()
@@ -33,6 +31,7 @@ if(error.response && error.response.status>=400 && error.response.status<=500){
     return(
 <div className={styles.signup_container}>
     <div className={styles.signup_form_container}>
+    <div className="visme_d" data-title="Untitled Project" data-url="319eojj4-untitled-project?fullPage=true" data-domain="forms" data-full-page="true" data-min-height="100vh" data-form-id="30359"></div>
         <div className={styles.left}>
 <h1>welcome back</h1>
 <Link to='/login'>

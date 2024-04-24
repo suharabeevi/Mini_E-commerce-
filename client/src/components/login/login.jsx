@@ -16,6 +16,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(data);
         try {
             const url = "http://localhost:5000/api/user/login";
             const { data: res } = await axios.post(url, data);
